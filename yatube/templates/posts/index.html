@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-  {{ title }}
+  Последние обновления на сайте
 {% endblock %} 
 
 {% block content %}
@@ -16,16 +16,18 @@
           <li>Группа: {{ post.group }}</li>
         </ul>
         <p>{{ post.text }}</p>
+
         {% if post.group %}
-        <a href="{% url 'posts:group_pages' post.group.slug %}"
-          >все записи группы</a
-        >
+        <a href="{% url 'posts:group_pages' post.group.slug %}">
+          все записи группы
+        </a>
         {% endif %}
+
       </article>
       {% if not forloop.last %}
-      <hr />
+      <hr>
       {% endif %}
     {% endfor %}
     <!-- под последним постом нет линии -->
-  </div>
+</div>
 {% endblock %}
