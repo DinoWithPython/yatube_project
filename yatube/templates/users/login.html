@@ -61,13 +61,13 @@
             </button>
             <!-- Тест на внимательность. Без переопределения шаблона этого адреса
             не существует. Нужно что-то делать, иначе все упадет -->
-            {% comment %} <a href="{% url 'users:password_reset_form' %}" class="btn btn-link">
+            <a href="{% url 'users:password_reset_form' %}" class="btn btn-link">
               Забыли пароль?
-            </a> {% endcomment %}
+            </a>
           </div>
           </form>
         </div> <!-- card body -->
       </div> <!-- card -->
     </div> <!-- col -->
 </div> <!-- row -->
-{% endblock %} 
+{% endblock %}
