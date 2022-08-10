@@ -1,9 +1,11 @@
 from django.conf import settings
 from django.shortcuts import get_object_or_404, render
+# from django.contrib.auth.decorators import login_required
 
 from .models import Group, Post
 
 
+# @login_required
 def index(request):
     template = 'posts/index.html'
     posts = Post.objects.prefetch_related(
