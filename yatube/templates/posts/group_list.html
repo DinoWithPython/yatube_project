@@ -7,7 +7,7 @@
   <div class="container py-5">
     <h1>Лев Толстой – зеркало русской революции.</h1>
     <p>Группа тайных поклонников графа.</p>
-    {% for post in posts %}
+    {% for post in page_obj %}
       <article>
         <ul>
           <li>Автор: {{ post.author.get_full_name }}</li>
@@ -21,6 +21,7 @@
       {% endif %}
 
     {% endfor %}
+    {% include 'includes/paginator.html' %}
     <!-- под последним постом нет линии -->
   </div>
 {% endblock %}

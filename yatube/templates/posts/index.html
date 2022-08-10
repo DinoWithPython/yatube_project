@@ -6,7 +6,7 @@
   <!-- класс py-5 создает отступы сверху и снизу блока -->
   <div class="container py-5">
     <h1>Последние обновления на сайте</h1>
-    {% for post in posts %}
+    {% for post in page_obj %}
       <article>
         <ul>
           <li>Автор: {{ post.author.get_full_name }}</li>
@@ -26,6 +26,7 @@
       <hr>
       {% endif %}
     {% endfor %}
+    {% include 'includes/paginator.html' %}
     <!-- под последним постом нет линии -->
 </div>
 {% endblock %}
