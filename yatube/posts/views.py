@@ -37,3 +37,19 @@ def group_posts(request, slug):
         'page_obj': page_obj
     }
     return render(request, template, context)
+
+
+def profile(request, username):
+    template = 'posts/profile.html'
+    context = {
+
+    }
+    return render(request, template, context)
+
+
+def post_detail(request, post_id):
+    template = 'posts/post_id.html'
+    context = {
+
+    }
+    return render(request, template, context)
