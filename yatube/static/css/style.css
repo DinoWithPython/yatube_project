@@ -1,0 +1,42 @@
+h1 {
+    text-align: center;
+    font-size: 42px;
+    padding: 15px;
+    font-family: Comic Sans MS, Comic Sans, Arial, sans-serif;
+}
+a {
+    text-align: center;
+    font-size: 12px;
+    padding: 15px;
+    font-family: Comic Sans MS, Comic Sans, Arial, sans-serif;
+}
+p {
+    text-align: center;
+    font-size: 24px;
+    padding: 15px;
+    font-family: Comic Sans MS, Comic Sans, Arial, sans-serif;
+    opacity:0;
+    transition: 1s; /*Скорость перехода состояния элемента*/
+    animation: show_link 5s 1; /* Указываем название анимации, её время и количество повторов*/
+    animation-fill-mode: forwards; /* Чтобы элемент оставался в конечном состоянии анимации */
+    animation-delay: 1s; /* Задержка перед началом */
+}
+.list-group {
+    width: 50%;
+    margin: 0 auto;
+}
+.aside-widget__info {
+    opacity:0;
+    transition: 1s; /*Скорость перехода состояния элемента*/
+    animation: show_link 5s 1; /* Указываем название анимации, её время и количество повторов*/
+    animation-fill-mode: forwards; /* Чтобы элемент оставался в конечном состоянии анимации */
+    animation-delay: 2s; /* Задержка перед началом */
+}
+@keyframes show_link {
+    0%{
+    opacity:0;
+    }
+    100% {
+    opacity:1;
+    }
+}
