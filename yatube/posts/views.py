@@ -31,7 +31,7 @@ def group_posts(request, slug):
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    
+
     context = {
         'group': group,
         'page_obj': page_obj
@@ -41,8 +41,16 @@ def group_posts(request, slug):
 
 def profile(request, username):
     template = 'posts/profile.html'
-    context = {
+    posts = Post.objects.prefetch_related('author.username')
 
+    paginator = Paginator(posts, settings.COUNT_OF_VISIBLE_POSTS)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context = {
+        'posts': posts,
+        'page_obj': page_obj,
     }
     return render(request, template, context)
 
