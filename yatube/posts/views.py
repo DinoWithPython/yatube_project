@@ -3,7 +3,7 @@ from django.conf import settings
 from django.shortcuts import get_object_or_404, render
 # from django.contrib.auth.decorators import login_required
 
-from .models import Group, Post
+from .models import Group, Post, User
 
 
 # @login_required
@@ -41,15 +41,16 @@ def group_posts(request, slug):
 
 def profile(request, username):
     template = 'posts/profile.html'
-    posts = Post.objects.prefetch_related('author.username')
-
-    paginator = Paginator(posts, settings.COUNT_OF_VISIBLE_POSTS)
+    user = get_object_or_404(User, username=username)
+    user_posts = user.posts.prefetch_related('author')
+    
+    paginator = Paginator(user_posts, settings.COUNT_OF_VISIBLE_POSTS)
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
     context = {
-        'posts': posts,
+        'author': user,
         'page_obj': page_obj,
     }
     return render(request, template, context)
@@ -57,7 +58,10 @@ def profile(request, username):
 
 def post_detail(request, post_id):
     template = 'posts/post_id.html'
-    context = {
+    post = get_object_or_404(Post, id=int(post_id))
+    # post = Post.objects.get(pk=post_id)
 
+    context = {
+        'post': post,
     }
     return render(request, template, context)
