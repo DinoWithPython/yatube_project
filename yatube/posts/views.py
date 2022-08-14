@@ -76,11 +76,30 @@ def post_create(request):
         if form.is_valid():
             text = form.cleaned_data['text']
             group = form.cleaned_data['group']
-            post = form.save(commit=False)
-            post.author = request.user
-            post.save()
+            form = form.save(commit=False)
+            form.author = request.user
+            form.save()
             return redirect('posts:profile', username=request.user)
         return render(request, template, {'form': form})
 
     form = PostForm()
     return render(request, template, {'form': form})
+
+
+@login_required
+def post_edit(request, post_id):
+    template = 'posts/create_post.html'
+    post = get_object_or_404(Post, pk=int(post_id))
+
+    if post.author == request.user:
+        form = PostForm(request.POST, instance=post)
+        if request.method == 'POST' and form.is_valid():
+            form = form.save(commit=False)
+            form.author = request.user
+            form.save()
+            return redirect('posts:post_detail', post.pk)
+        return render(request, template, {'form': form,
+                                          'is_edit': True,
+                                          'post': post})
+    else:
+        return redirect('posts:post_detail', post.pk)

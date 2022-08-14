@@ -9,15 +9,25 @@
     {% for post in page_obj %}
       <article>
         <ul>
-          <li>Автор: {{ post.author.get_full_name }}</li>
+          <li>
+            Автор: {{ post.author.get_full_name }}
+            <a href="{% url 'posts:profile' post.author %}">все посты пользователя</a>
+          </li>
           <li>Дата публикации: {{ post.pub_date|date:"d E Y" }}</li>
           <li>Группа: {{ post.group }}</li>
         </ul>
         <p>{{ post.text }}</p>
-
+        <a href="{% url 'posts:post_detail' post.id %}">подробная информация </a>
         {% if post.group %}
+        <br>
         <a href="{% url 'posts:group_pages' post.group.slug %}">
           все записи группы
+        </a>
+        {% endif %}
+        {% if request.user == post.author %}
+        <br>
+        <a href="{% url 'posts:post_edit' post.id %}">
+          редактировать пост
         </a>
         {% endif %}
 
