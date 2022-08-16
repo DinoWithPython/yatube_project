@@ -1,61 +1,69 @@
 <header>
   <!-- Использованы классы бустрапа для создания типовой навигации с логотипом -->
   <!-- В дальнейшем тут будет создано полноценное меню -->
-  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: lightskyblue">
+  <nav class="navbar navbar-expand-lg navbar-light"
+       style="background-color: lightskyblue">
     <div class="container">
       <a class="navbar-brand" href="{% url 'posts:index' %}">
-
         {% load static %}
-        <img src="{% static 'img/logo.png' %}" width="30" height="30" class="d-inline-block align-top" alt="" />
+        <img src="{% static 'img/logo.png' %}"
+             width="30"
+             height="30"
+             class="d-inline-block align-top"
+             alt=""/>
         <!-- тег span используется для добавления нужных стилей отдельным участкам текста -->
         <span style="color: red">Ya</span>tube
       </a>
-
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Переключатель навигации">
+      <button class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Переключатель навигации">
         <span class="navbar-toggler-icon"></span>
       </button>
-
-      <div class="collapse navbar-collapse" id="navbarSupportedContent" style="flex-grow: inherit;">
-        
+      <div class="collapse navbar-collapse"
+           id="navbarSupportedContent"
+           style="flex-grow: inherit;">
         {% with request.resolver_match.view_name as view_name %}
-        <ul class="nav nav-pills me-auto mb-2 mb-lg-0" style="justify-content: flex-end;">
-          <li class="nav-item">
-            <a class="nav-link {% if view_name  == 'about:author' %}active{% endif %}" href="{% url 'about:author' %}">Об
-              авторе</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link {% if view_name  == 'about:tech' %}active{% endif %}"
-              href="{% url 'about:tech' %}">Технологии</a>
-          </li>
-          {% if request.user.is_authenticated %}
-          <li class="nav-item">
-            <a class="nav-link {% if view_name  == 'posts:post_create' %}active{% endif %}" 
-              href="{% url 'posts:post_create' %}">Новая запись</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link link-light {% if view_name  == 'auth:password_change' %}active{% endif %}"
-              href="{% url 'auth:password_change' %}">Изменить пароль</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link link-light {% if view_name  == 'auth:logout' %}active{% endif %}"
-              href="{% url 'auth:logout' %}">Выйти</a>
-          </li>
-          <li>
-            Пользователь: {{ user.username }}
-          </li>
-          {% else %}
-          <li class="nav-item">
-            <a class="nav-link link-light {% if view_name  == 'auth:login' %}active{% endif %}"
-              href="{% url 'auth:login' %}">Войти</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link link-light {% if view_name  == 'auth:signup' %}active{% endif %}"
-              href="{% url 'auth:signup' %}">Регистрация</a>
-          </li>
-          {% endif %}
-        </ul>
+          <ul class="nav nav-pills me-auto mb-2 mb-lg-0"
+              style="justify-content: flex-end;">
+            <li class="nav-item">
+              <a class="nav-link {% if view_name == 'about:author' %}active{% endif %}"
+                 href="{% url 'about:author' %}">Об авторе</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {% if view_name == 'about:tech' %}active{% endif %}"
+                 href="{% url 'about:tech' %}">Технологии</a>
+            </li>
+            {% if request.user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link {% if view_name == 'posts:post_create' %}active{% endif %}"
+                   href="{% url 'posts:post_create' %}">Новая запись</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link link-light {% if view_name == 'auth:password_change' %}active{% endif %}"
+                   href="{% url 'auth:password_change' %}">Изменить пароль</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link link-light {% if view_name == 'auth:logout' %}active{% endif %}"
+                   href="{% url 'auth:logout' %}">Выйти</a>
+              </li>
+              <li>Пользователь: {{ user.username }}</li>
+            {% else %}
+              <li class="nav-item">
+                <a class="nav-link link-light {% if view_name == 'auth:login' %}active{% endif %}"
+                   href="{% url 'auth:login' %}">Войти</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link link-light {% if view_name == 'auth:signup' %}active{% endif %}"
+                   href="{% url 'auth:signup' %}">Регистрация</a>
+              </li>
+            {% endif %}
+          </ul>
         {% endwith %}
-      </div>  
+      </div>
     </div>
   </nav>
 </header>

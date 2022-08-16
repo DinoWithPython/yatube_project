@@ -1,42 +1,15 @@
-{% extends 'base.html' %}
-
-{% block title %}Профайл пользователя {{ author.get_full_name }}{% endblock %}
-
+{% extends "base.html" %}
+{% block title %}
+  Профайл пользователя {{ author.get_full_name }}
+{% endblock title %}
 {% block content %}
-<div class="container py-5">
-  <h1>Все посты пользователя {{ author.get_full_name }} </h1>
-  <h3>Всего постов: {{ author.posts.count }} </h3>
-  {% for post in page_obj %}
-  <article>
-    <ul>
-      {% comment %} <li>
-        Автор: {{ post.author.get_full_name }}
-        <a href="{% url 'posts:profile' post.author %}">все посты пользователя</a>
-      </li> {% endcomment %}
-      <li>Дата публикации: {{ post.pub_date|date:"d E Y" }}</li>
-      <li>Группа: {{ post.group }}</li>
-    </ul>
-    <p>{{ post.text }}</p>
-    <a href="{% url 'posts:post_detail' post.id %}">подробная информация </a>
-  </article>
-  {% if post.group.slug %}
-  <a href="{% url 'posts:group_pages' post.group.slug %}">все записи группы</a>
-  {% endif %}
-  {% if request.user == post.author %}
-  <br>
-  <a href="{% url 'posts:post_edit' post.id %}">
-    редактировать пост
-  </a>
-  {% endif %}
-  
-  {% if not forloop.last %}
-  <hr />
-  {% endif %}
-
-  {% endfor %}
-  <!-- Остальные посты. после последнего нет черты -->
-  <!-- Здесь подключён паджинатор -->
-  {% include 'includes/paginator.html' %}
-</div>
-
-{% endblock %}
+  <div class="container py-5">
+    <h1>Все посты пользователя {{ author.get_full_name }}</h1>
+    <h3>Всего постов: {{ author.posts.count }}</h3>
+    {% for post in page_obj %}
+      {% include 'includes/post.html' with request=request post=post is_profile=True %}
+      {% if not forloop.last %}<hr />{% endif %}
+    {% endfor %}
+    {% include 'includes/paginator.html' %}
+  </div>
+{% endblock content %}

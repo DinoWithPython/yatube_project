@@ -1,36 +1,35 @@
 {% extends "base.html" %}
-{% block title %}Технологии{% endblock %}
+{% block title %}
+    Технологии
+{% endblock title %}
 {% block content %}
-{% load static %}
-<link rel="stylesheet" href="{% static 'css/style.css' %}" />
-{% comment %} Колонки с отступом сверху и снизу {% endcomment %}
-<div class="row">
-    <h1>Вот что я умею</h1>
-    {% comment %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    {% comment %} Колонки с отступом сверху и снизу {% endcomment %}
+    <div class="row">
+        <h1>Вот что я умею</h1>
+        {% comment %}
     Статья
     Займет всю ширину блока на мобильном
     и 75% при размерах экрана ≥768px
-    {% endcomment %}
-    <article class="col-12 col-md-9">
-        <p>Это примерный исходник шаблона с технологиями. 2022 год, а фигачим на Джанге 2.2? Да и питончик 3.7.9 не
-            вдохновляет. Но оно работает и в целом норм) По крайней мере курс интересный. А раз я бэк, то как-нибудь пну
-            своего внутренного фронта и доработаю енто всё!11 азазаз!!1!</p>
-    </article>
-</div>
-{% comment %}
+        {% endcomment %}
+        <article class="col-12 col-md-9">
+            <p>
+                Это примерный исходник шаблона с технологиями. 2022 год, а фигачим на Джанге 2.2? Да и питончик 3.7.9 не
+                вдохновляет. Но оно работает и в целом норм) По крайней мере курс интересный. А раз я бэк, то как-нибудь пну
+                своего внутренного фронта и доработаю енто всё!11 азазаз!!1!
+            </p>
+        </article>
+    </div>
+    {% comment %}
 Боковой блок со списком технологий
 Займет всю ширину блока на мобильном
 и 25% при размерах экрана ≥768px
-{% endcomment %}
-<aside class="col-12 col-md-3">
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item">
-            Python 3.7.9
-        </li>
-        <li class="list-group-item">
-            Django 2.2.19
-        </li>
-    </ul>
-</aside>
-
-{% endblock %}
+    {% endcomment %}
+    <aside class="col-12 col-md-3">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Python 3.7.9</li>
+            <li class="list-group-item">Django 2.2.19</li>
+        </ul>
+    </aside>
+{% endblock content %}

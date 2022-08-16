@@ -1,38 +1,57 @@
 {% extends "base.html" %}
-{% block title %}Об авторе проекта{% endblock %}
+{% block title %}
+  Об авторе проекта
+{% endblock title %}
 {% block content %}
-{% load static %}
-<link rel="stylesheet" href="{% static 'css/style.css' %}" />
-<div class="container py-5">
-  <h1>Здравствуйте, Вы попали на оч важн страниц!1!!</h1>
-  <p>
-    Перед Вами результат обучения на яндекс практикуме в течение нескольких месяцев. Пока это не выглядит мега-круто, но
-    эт только пока.
-  </p>
-  <p>
-    Когда-нибудь афтор доработает всё это!
-  </p>
-
-  <ul class="aside-widget__info" style="list-style-type: none">
-    <li class="profile-stat_item profile-stat_item__social">
-      <a href="https://github.com/LunarBirdMYT" class="profile-stat_item__social-link" target="_blank"
-        style="text-decoration: none;" rel="noopener noreferrer">
-        <img src="{% static 'img/github.svg' %}" width="16" height="16" alt="LunarBirdMYT"> GitHub
-      </a>
-    </li>
-    <li class="profile-stat_item profile-stat_item__social">
-      <a href="https://gitflic.ru/user/lunarbirdmyt/projects" class="profile-stat_item__social-link" target="_blank"
-        style="text-decoration: none;" rel="noopener noreferrer">
-        <img src="{% static 'img/gitflic.png' %}" width="16" height="16"
-          alt="https://gitflic.ru/user/lunarbirdmyt/projects"> GitFlic
-      </a>
-    </li>
-    <li class="profile-stat_item profile-stat_item__social">
-      <a href="https://vk.com/lunarbird" class="profile-stat_item__social-link" target="_blank"
-        style="text-decoration: none;" rel="noopener noreferrer">
-        <img src="{% static 'img/vk.svg' %}" width="16" height="16" alt="lunarbird"> Вконтакте
-      </a>
-    </li>
-  </ul>
-</div>
-{% endblock %}
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  <div class="container py-5">
+    <h1>Здравствуйте, Вы попали на оч важн страниц!1!!</h1>
+    <p>
+      Перед Вами результат обучения на яндекс практикуме в течение нескольких месяцев. Пока это не выглядит мега-круто, но
+      эт только пока.
+    </p>
+    <p>Когда-нибудь афтор доработает всё это!</p>
+    <ul class="aside-widget__info" style="list-style-type: none">
+      <li class="profile-stat_item profile-stat_item__social">
+        <a href="https://github.com/LunarBirdMYT"
+           class="profile-stat_item__social-link"
+           target="_blank"
+           style="text-decoration: none;"
+           rel="noopener noreferrer">
+          <img src="{% static 'img/github.svg' %}"
+               width="16"
+               height="16"
+               alt="LunarBirdMYT"/>
+          GitHub
+        </a>
+      </li>
+      <li class="profile-stat_item profile-stat_item__social">
+        <a href="https://gitflic.ru/user/lunarbirdmyt/projects"
+           class="profile-stat_item__social-link"
+           target="_blank"
+           style="text-decoration: none;"
+           rel="noopener noreferrer">
+          <img src="{% static 'img/gitflic.png' %}"
+               width="16"
+               height="16"
+               alt="https://gitflic.ru/user/lunarbirdmyt/projects"/>
+          GitFlic
+        </a>
+      </li>
+      <li class="profile-stat_item profile-stat_item__social">
+        <a href="https://vk.com/lunarbird"
+           class="profile-stat_item__social-link"
+           target="_blank"
+           style="text-decoration: none;"
+           rel="noopener noreferrer">
+          <img src="{% static 'img/vk.svg' %}"
+               width="16"
+               height="16"
+               alt="lunarbird"/>
+          Вконтакте
+        </a>
+      </li>
+    </ul>
+  </div>
+{% endblock content %}
