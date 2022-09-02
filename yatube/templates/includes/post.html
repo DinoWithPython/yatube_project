@@ -1,3 +1,4 @@
+{% load thumbnail %}
 <article>
   <ul>
     {% if not is_profile %}
@@ -8,6 +9,9 @@
     {% endif %}
     <li>Дата публикации: {{ post.pub_date|date:"d E Y" }}</li>
     <li>Группа: {{ post.group }}</li>
+    {% thumbnail post.image "960x339" crop="center" upscale=True as im %}
+    <img class="card-img my-2" src="{{ im.url }}">
+    {% endthumbnail %}
   </ul>
   <p>{{ post.text|linebreaks }}</p>
   <a href="{% url 'posts:post_detail' post.id %}">подробная информация</a>
