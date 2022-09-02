@@ -1,12 +1,18 @@
+import shutil
+import tempfile
+
 from django import forms
 from django.conf import settings
-from django.test import Client, TestCase
+from django.core.files.uploadedfile import SimpleUploadedFile
+from django.test import Client, TestCase, override_settings
 from django.urls import reverse
 
 from posts.models import Group, Post, User
 
+TEMP_MEDIA_ROOT = tempfile.mkdtemp(dir=settings.BASE_DIR)
 
-def check_context_pages(obj, context):
+
+def check_context_pages(obj, context, image=False):
     """Функция проверяет контест поста на наличие полей модели."""
     contex_author = context.author
     contex_group = context.group
@@ -14,8 +20,12 @@ def check_context_pages(obj, context):
     obj.assertEqual(contex_author, obj.post.author)
     obj.assertEqual(contex_group, obj.post.group)
     obj.assertEqual(contex_text, obj.post.text)
+    if image:
+        context_image = context.image
+        obj.assertTrue(context_image)
 
 
+@override_settings(MEDIA_ROOT=TEMP_MEDIA_ROOT)
 class PostsPagesTests(TestCase):
     @classmethod
     def setUpClass(cls):
@@ -32,10 +42,24 @@ class PostsPagesTests(TestCase):
             slug='test-slug1',
             description='Тестовое описание',
         )
+        cls.small_gif = (            
+             b'\x47\x49\x46\x38\x39\x61\x02\x00'
+             b'\x01\x00\x80\x00\x00\x00\x00\x00'
+             b'\xFF\xFF\xFF\x21\xF9\x04\x00\x00'
+             b'\x00\x00\x00\x2C\x00\x00\x00\x00'
+             b'\x02\x00\x01\x00\x00\x02\x02\x0C'
+             b'\x0A\x00\x3B'
+        )
+        cls.uploaded = SimpleUploadedFile(
+            name='small.gif',
+            content=cls.small_gif,
+            content_type='image/gif'
+        )
         cls.post = Post.objects.create(
             author=cls.second_user,
             group=cls.first_group,
-            text='Тестовый пост с большим количеством символов.'
+            text='Тестовый пост с большим количеством символов.',
+            image=cls.uploaded
         )
         cls.templates_pages_names = {
             reverse(
@@ -74,6 +98,11 @@ class PostsPagesTests(TestCase):
         self.authorized_client = Client()
         self.authorized_client.force_login(self.second_user)
 
+    @classmethod
+    def tearDownClass(cls):
+        super().tearDownClass()
+        shutil.rmtree(TEMP_MEDIA_ROOT, ignore_errors=True)
+
     def test_pages_uses_correct_template(self):
         """URL-адрес использует соответствующий шаблон."""
         for reverse_name, template in self.templates_pages_names.items():
@@ -101,7 +130,7 @@ class PostsPagesTests(TestCase):
                                 self.assertIsInstance(form_field, expected)
                         continue
                     context_obj = response.context.get('post')
-                check_context_pages(self, context_obj)
+                check_context_pages(self, context_obj, image=True)
 
 
 class PaginatorViewsTest(TestCase):
@@ -194,9 +223,9 @@ class CheckCreationTest(TestCase):
         cls.post = Post.objects.create(
             author=cls.user,
             group=cls.first_group,
-            text='Тестовый пост с большим количеством символов.'
+            text='Тестовый пост с большим количеством символов.',
         )
-        cls.views_names = {
+        cls.views_names = (
             reverse('posts:index'),
             reverse(
                 'posts:group_pages',
@@ -206,7 +235,7 @@ class CheckCreationTest(TestCase):
                 'posts:profile',
                 kwargs={'username': cls.user.username}
             )
-        }
+        )
 
     def setUp(self):
         self.guest_client = Client()
