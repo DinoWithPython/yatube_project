@@ -30,7 +30,7 @@ def profile(request, username):
 
 def post_detail(request, post_id):
     post = get_object_or_404(Post, id=int(post_id))
-    return render(request, 'posts/post_id.html', {'post': post, })
+    return render(request, 'posts/post_detail.html', {'post': post, })
 
 
 @login_required

@@ -1,22 +1,25 @@
+.this_author {
+    width: 50px;
+}
 h1 {
     text-align: center;
-    /* font-size: 42px; */
+    font-size: 42px;
     padding: 15px;
-    /* font-family: Comic Sans MS, Comic Sans, Arial, sans-serif; */
+    font-family: Comic Sans MS, Comic Sans, Arial, sans-serif;
 }
 
 a {
     text-align: center;
-    /* font-size: 12px; */
+    font-size: 12px;
     padding: 15px;
-    /* font-family: Comic Sans MS, Comic Sans, Arial, sans-serif; */
+    font-family: Comic Sans MS, Comic Sans, Arial, sans-serif;
 }
 
 p {
     text-align: center;
-    /* font-size: 24px; */
+    font-size: 24px;
     padding: 15px;
-    /* font-family: Comic Sans MS, Comic Sans, Arial, sans-serif; */
+    font-family: Comic Sans MS, Comic Sans, Arial, sans-serif;
     opacity: 0;
     transition: 1s;
     animation: show_link 5s 1;
@@ -41,6 +44,7 @@ p {
     /* Задержка перед началом */
 }
 
+
 @keyframes show_link {
     0% {
         opacity: 0;
@@ -49,4 +53,8 @@ p {
     100% {
         opacity: 1;
     }
+}
+
+section p {
+    text-align: left;
 }
