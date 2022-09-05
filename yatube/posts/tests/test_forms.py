@@ -6,7 +6,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import Client, TestCase, override_settings
 from django.urls import reverse
 
-from posts.models import Group, Post, User
+from posts.models import Comment, Group, Post, User
 
 TEMP_MEDIA_ROOT = tempfile.mkdtemp(dir=settings.BASE_DIR)
 
@@ -42,7 +42,7 @@ class PostsCreateFormTest(TestCase):
     def test_post_add_database(self):
         """Проверка записи поста в БД."""
         posts_count = Post.objects.count()
-        small_gif = (            
+        small_gif = (
              b'\x47\x49\x46\x38\x39\x61\x02\x00'
              b'\x01\x00\x80\x00\x00\x00\x00\x00'
              b'\xFF\xFF\xFF\x21\xF9\x04\x00\x00'
@@ -113,3 +113,22 @@ class PostsCreateFormTest(TestCase):
             data=form_data
         )
         self.assertNotIsInstance(non_auth_post, Post)
+
+    def test_add_comment(self):
+        """Проверяем, что комментарий можно оставить и он будет в контексте."""
+        count_comments = Comment.objects.count()
+        form_data = {
+            'text': 'Супер коммент!'
+        }
+        self.authorized_client.post(
+            reverse(
+                'posts:add_comment',
+                kwargs={
+                    'post_id': self.post.id,
+                }
+            ),
+            data=form_data
+        )
+        comment_form = Comment.objects.latest('id')
+        self.assertEqual(form_data['text'], comment_form.text)
+        self.assertEqual(Comment.objects.count(), count_comments + 1)

@@ -42,7 +42,7 @@ class PostsPagesTests(TestCase):
             slug='test-slug1',
             description='Тестовое описание',
         )
-        cls.small_gif = (            
+        cls.small_gif = (
              b'\x47\x49\x46\x38\x39\x61\x02\x00'
              b'\x01\x00\x80\x00\x00\x00\x00\x00'
              b'\xFF\xFF\xFF\x21\xF9\x04\x00\x00'
@@ -185,7 +185,7 @@ class PaginatorViewsTest(TestCase):
                     settings.COUNT_OF_VISIBLE_POSTS)
 
     def test_second_page_contains_remains(self):
-        """Првоеряем, что вторая страница содержит количество постов,
+        """Проверяем, что вторая страница содержит количество постов,
         оставшееся после отображения на первой странице.
         """
         no_group = self.COUNT_POSTS_WITH_GROUP

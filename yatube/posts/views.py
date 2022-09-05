@@ -1,8 +1,8 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 
-from .forms import PostForm, CommentForm
-from .models import Group, Post, User, Comment
+from .forms import CommentForm, PostForm
+from .models import Comment, Group, Post, User
 from .utils import create_paginator
 
 
@@ -37,7 +37,14 @@ def post_detail(request, post_id):
         comment.post = post
         comment.save()
     comments = Comment.objects.prefetch_related('post').filter(post=post_id)
-    return render(request, 'posts/post_detail.html', {'post': post, 'form': form, 'comments': comments})
+    return render(
+        request,
+        'posts/post_detail.html',
+        {
+            'post': post,
+            'form': form,
+            'comments': comments
+        })
 
 
 @login_required

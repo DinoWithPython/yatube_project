@@ -42,6 +42,8 @@ class StaticURLTests(TestCase):
             + [('/create/', '/auth/login/?next=/create/')]
             + [(f'/posts/{cls.post_first.id}/edit/',
                 f'/auth/login/?next=/posts/{cls.post_first.id}/edit/')]
+            + [(f'/posts/{cls.post_first.id}/comment/',
+                f'/auth/login/?next=/posts/{cls.post_first.id}/comment/')]
         }
 
     def setUp(self):
@@ -67,7 +69,8 @@ class StaticURLTests(TestCase):
             with self.subTest(address=address):
                 response = self.guest_client.get(address)
                 if address in ('/create/',
-                               f'/posts/{self.post_first.id}/edit/'):
+                               f'/posts/{self.post_first.id}/edit/',
+                               f'/posts/{self.post_first.id}/comment/'):
                     self.assertEqual(response.status_code,
                                      HTTPStatus.FOUND.value)
                     self.assertRedirects(response, template)
