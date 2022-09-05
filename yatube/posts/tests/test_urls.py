@@ -90,5 +90,5 @@ class StaticURLTests(TestCase):
             with self.subTest(address=address):
                 self.assertEqual(response.status_code,
                                  HTTPStatus.NOT_FOUND.value,
-                                 'К несуществуещей странице должен вернуться 404')
+                                 'К несуществуещей странице вернётся 404')
                 self.assertTemplateUsed(response, template)
