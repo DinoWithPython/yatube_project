@@ -4,6 +4,7 @@ import tempfile
 from django import forms
 from django.conf import settings
 from django.core.files.uploadedfile import SimpleUploadedFile
+from django.core.cache import cache
 from django.test import Client, TestCase, override_settings
 from django.urls import reverse
 
@@ -97,6 +98,7 @@ class PostsPagesTests(TestCase):
     def setUp(self):
         self.authorized_client = Client()
         self.authorized_client.force_login(self.second_user)
+        cache.clear()
 
     @classmethod
     def tearDownClass(cls):
@@ -172,6 +174,7 @@ class PaginatorViewsTest(TestCase):
 
     def setUp(self):
         self.guest_client = Client()
+        cache.clear()
 
     def test_first_page_contains_settings_records(self):
         """Проверяем, что первая страница содержит количество постов,
@@ -239,6 +242,7 @@ class CheckCreationTest(TestCase):
 
     def setUp(self):
         self.guest_client = Client()
+        cache.clear()
 
     def test_creation_record_will_pages(self):
         """Проверяем, что при указании группы пост появляется
@@ -271,3 +275,24 @@ class CheckCreationTest(TestCase):
             len(context_second),
             'Пост появился в двух группах.'
         )
+
+
+class CacheTest(TestCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.user = User.objects.create_user(username='auth')
+        cls.post = Post.objects.create(
+            author=cls.user,
+            text='Тестовый пост с большим количеством символов.',
+        )
+        cls.views = reverse('posts:index')
+
+    def setUp(self):
+        self.guest_client = Client()
+        # cache.clear()
+    
+    def test_cache_index_page(self):
+        """Проверяем работу кеша через удаление записи."""
+        responce = self.guest_client.get(self.views)
+        print(responce.content)

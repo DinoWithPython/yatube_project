@@ -163,3 +163,11 @@ CSRF_FAILURE_VIEW = 'core.views.csrf_failure'
 # Настройки для пользовательских картинок
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+# Настройки кеша
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    }
+}
