@@ -1,5 +1,6 @@
 from http import HTTPStatus
 
+from django.core.cache import cache
 from django.test import Client, TestCase
 
 from posts.models import Group, Post, User
@@ -38,7 +39,7 @@ class StaticURLTests(TestCase):
         }
         cls.templates_url_not_auth = {
             adress: template for adress, template in list(
-                cls.templates_url_auth.items())[:5]
+                cls.templates_url_auth.items())[:4]
             + [('/create/', '/auth/login/?next=/create/')]
             + [(f'/posts/{cls.post_first.id}/edit/',
                 f'/auth/login/?next=/posts/{cls.post_first.id}/edit/')]
@@ -65,6 +66,7 @@ class StaticURLTests(TestCase):
                                  HTTPStatus.OK.value)
                 self.assertTemplateUsed(response,
                                         template)
+        cache.clear()
         for address, template in self.templates_url_not_auth.items():
             with self.subTest(address=address):
                 response = self.guest_client.get(address)
@@ -82,7 +84,11 @@ class StaticURLTests(TestCase):
 
     def test_unexpecting_page(self):
         """Не существующая страница вернет ошибку 404."""
-        response = self.guest_client.get('/test_not_using_page/')
-        self.assertEqual(response.status_code,
-                         HTTPStatus.NOT_FOUND.value,
-                         'К несуществуещей странице должен вернуться 404')
+        templates_url = {'/test_not_using_page/': 'core/404.html'}
+        for address, template in templates_url.items():
+            response = self.guest_client.get(address)
+            with self.subTest(address=address):
+                self.assertEqual(response.status_code,
+                                 HTTPStatus.NOT_FOUND.value,
+                                 'К несуществуещей странице должен вернуться 404')
+                self.assertTemplateUsed(response, template)
