@@ -63,3 +63,31 @@ class Post(models.Model):
 
     def __str__(self):
         return self.text[:settings.COUNT_LETTERS_MODEL_POST]
+
+
+class Comment(models.Model):
+    post = models.ForeignKey(
+        Post,
+        on_delete=models.CASCADE,
+        related_name='comments',
+        verbose_name='Комментарий'
+    )
+    author = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='comments',
+        verbose_name='Комментарий'
+    )
+    text = models.TextField(
+        verbose_name='Текст комментария',
+        help_text='Введите комментарий'
+    )
+    created = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name='Дата публикации'
+    )
+
+    class Meta:
+        ordering = ('-created', 'post')
+        verbose_name_plural = 'Комментарии'
+        verbose_name = 'Комментарий'
