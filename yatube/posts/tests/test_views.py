@@ -8,7 +8,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import Client, TestCase, override_settings
 from django.urls import reverse
 
-from posts.models import Group, Post, User
+from posts.models import Follow, Group, Post, User
 
 TEMP_MEDIA_ROOT = tempfile.mkdtemp(dir=settings.BASE_DIR)
 
@@ -306,4 +306,53 @@ class CacheTest(TestCase):
         self.assertNotEqual(responce_with_cache, responce_no_cache)
 
 
-# class FollowTest(TestCase):
+class FollowTest(TestCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.first_user = User.objects.create_user(username='First')
+        cls.second_user = User.objects.create_user(username='Second')
+        cls.third_user = User.objects.create_user(username='Third')
+        cls.post = Post.objects.create(
+            author=cls.first_user,
+            text='Тестовый пост с большим количеством символов.',
+        )
+
+    def setUp(self):
+        self.guest_client = Client()
+        self.authorized_client = Client()
+        self.authorized_client.force_login(self.second_user)
+        self.not_follow_user = Client()
+        self.not_follow_user.force_login(self.third_user)
+
+    def test_follow_users(self):
+        """Авторизованный пользователь может подписываться на авторов
+        и удалять из подписок.
+        """
+        Follow.objects.create(user=self.second_user,
+                              author=self.first_user)
+        follow = Follow.objects.latest('id')
+        self.assertEqual(
+            (follow.user, follow.author),
+            (self.second_user, self.first_user)
+        )
+        Follow.objects.filter(user=self.second_user,
+                              author=self.first_user).delete()
+        self.assertFalse(len(Follow.objects.all()))
+
+    def test_follower_can_view_new_record_and_nofollower_cant(self):
+        """Новая запись пользователя появляется в ленте тех, кто на него
+        подписан, и не появляется в ленте не подписанных.
+        """
+        Follow.objects.create(user=self.second_user,
+                              author=self.first_user)
+        new_post = Post.objects.create(
+            author=self.first_user,
+            text='Лови, подписота',
+        )
+        follower = self.authorized_client.get(reverse('posts:follow_index'))
+        follower_obj = follower.context.get('page_obj')[0]
+        self.assertEqual(str(follower_obj), new_post.text)
+        not_follower = self.not_follow_user.get(reverse('posts:follow_index'))
+        not_follower_obj = not_follower.context.get('page_obj')
+        self.assertFalse(len(not_follower_obj))
