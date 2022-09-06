@@ -304,3 +304,6 @@ class CacheTest(TestCase):
         responce_no_cache = self.guest_client.get(
             self.views).content.decode("utf-8")
         self.assertNotEqual(responce_with_cache, responce_no_cache)
+
+
+# class FollowTest(TestCase):

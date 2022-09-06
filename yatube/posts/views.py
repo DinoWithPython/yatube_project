@@ -26,16 +26,18 @@ def profile(request, username):
     user = get_object_or_404(User, username=username)
     user_posts = user.posts.prefetch_related('group')
     page_obj = create_paginator(request, user_posts)
-    post_follow = Post.objects.filter(
-        author__following__user=request.user
-    )
-    if post_follow:
-        following = True
-    else:
-        following = False
+    if request.user.is_authenticated:
+        post_follow = Post.objects.filter(
+            author__following__user=request.user
+        )
+
+        if post_follow:
+            return render(request, 'posts/profile.html', {'author': user,
+                                                          'page_obj': page_obj,
+                                                          'following': True})
     return render(request, 'posts/profile.html', {'author': user,
                                                   'page_obj': page_obj,
-                                                  'following': following})
+                                                  'following': False})
 
 
 def post_detail(request, post_id):

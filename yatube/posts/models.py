@@ -96,7 +96,7 @@ class Follow(models.Model):
         on_delete=models.CASCADE,
         related_name='follower'
     )
-    author = models.ForeignKey(
+    author = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
         related_name='following',
