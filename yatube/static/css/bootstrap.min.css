@@ -1223,7 +1223,7 @@ progress {
 
     .col-md-9 {
         flex: 0 0 auto;
-        width: 75%
+        width: 65%
     }
 
     .col-md-10 {
@@ -7853,7 +7853,9 @@ fieldset:disabled .btn {
 }
 
 .mb-5 {
-    margin-bottom: 3rem !important
+    margin-bottom: 3rem !important;
+    width: 75%;
+    margin: auto;
 }
 
 .mb-auto {
