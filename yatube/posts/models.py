@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.contrib.auth import get_user_model
+from django.core.exceptions import ValidationError
 from django.db import models
 
 from core.models import CreatedModel
@@ -62,6 +63,12 @@ class Post(CreatedModel):
     def __str__(self):
         return self.text[:settings.COUNT_LETTERS_MODEL_POST]
 
+    def clean(self):
+        if self.text == 'yandex':
+            raise ValidationError('Вы нашли пасхалку! :)')
+        if self.text.isspace():
+            raise ValidationError('Пробелы - зло')
+
 
 class Comment(CreatedModel):
     post = models.ForeignKey(
@@ -89,6 +96,12 @@ class Comment(CreatedModel):
     def __str__(self):
         return self.text
 
+    def clean(self):
+        if self.text == 'азазазаз!!!1!1!':
+            raise ValidationError('Поздравляем, Вы тролль! :)')
+        if self.text.isspace():
+            raise ValidationError('Пробелы - зло')
+
 
 class Follow(models.Model):
     user = models.ForeignKey(
@@ -107,5 +120,9 @@ class Follow(models.Model):
             models.UniqueConstraint(
                 fields=['author', 'user'],
                 name='unique_follow'
-            )
+            ),
+            models.CheckConstraint(
+                check=~models.Q(user=models.F('author')),
+                name='user_cannot_follow_himself'
+            ),
         ]

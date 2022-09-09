@@ -5,6 +5,7 @@ from django import forms
 from django.conf import settings
 from django.core.cache import cache
 from django.core.files.uploadedfile import SimpleUploadedFile
+from django.db.utils import IntegrityError
 from django.test import Client, TestCase, override_settings
 from django.urls import reverse
 
@@ -290,7 +291,7 @@ class CacheTest(TestCase):
 
     def setUp(self):
         self.guest_client = Client()
-        # cache.clear()
+        cache.clear()
 
     def test_cache_index_page(self):
         """Проверяем работу кеша через удаление записи."""
@@ -356,3 +357,23 @@ class FollowTest(TestCase):
         not_follower = self.not_follow_user.get(reverse('posts:follow_index'))
         not_follower_obj = not_follower.context.get('page_obj')
         self.assertFalse(len(not_follower_obj))
+
+    def test_user_not_can_follow_twice(self):
+        """Пользователь не может пописаться на одного автора дважды."""
+        Follow.objects.create(user=self.second_user,
+                              author=self.first_user)
+        try:
+            Follow.objects.create(user=self.second_user,
+                                  author=self.first_user)
+            raise IntegrityError('На пользователя можно подписаться дважды.')
+        except IntegrityError:
+            pass
+
+    def test_user_can_not_follow_himself(self):
+        """Пользователь не может подписаться на себя."""
+        try:
+            Follow.objects.create(user=self.second_user,
+                                  author=self.second_user)
+            raise IntegrityError('Пользователь подписался на себя же.')
+        except IntegrityError:
+            pass

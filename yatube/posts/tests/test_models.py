@@ -21,14 +21,13 @@ class PostModelTest(TestCase):
 
     def test_models_have_correct_object_names(self):
         """Проверяем, что у моделей корректно работает __str__."""
-        str_group = str(self.group)
-        self.assertEqual(str_group, self.group.title)
-
-        str_post = str(self.post)
-        self.assertEqual(
-            str_post,
-            self.post.text[:settings.COUNT_LETTERS_MODEL_POST]
-        )
+        models_name = {
+            self.group: str(self.group),
+            self.post: self.post.text[:settings.COUNT_LETTERS_MODEL_POST]
+        }
+        for obj, expect_obj_str in models_name.items():
+            with self.subTest(obj=obj):
+                self.assertEqual(str(obj), expect_obj_str)
 
     def test_verbose_name(self):
         """verbose_name совпадает с ожидаемым."""

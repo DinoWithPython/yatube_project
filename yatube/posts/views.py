@@ -26,28 +26,19 @@ def profile(request, username):
     user = get_object_or_404(User, username=username)
     user_posts = user.posts.prefetch_related('group')
     page_obj = create_paginator(request, user_posts)
-    if request.user.is_authenticated:
-        post_follow = Post.objects.filter(
-            author__following__user=request.user
-        )
-
-        if post_follow:
-            return render(request, 'posts/profile.html', {'author': user,
-                                                          'page_obj': page_obj,
-                                                          'following': True})
+    post_follow = (
+        request.user.is_authenticated
+        and Post.objects.filter(
+            author__following__user=request.user).exists()
+    )
     return render(request, 'posts/profile.html', {'author': user,
                                                   'page_obj': page_obj,
-                                                  'following': False})
+                                                  'following': post_follow})
 
 
 def post_detail(request, post_id):
-    post = get_object_or_404(Post, id=int(post_id))
-    form = CommentForm(request.POST or None)
-    if form.is_valid():
-        comment = form.save(commit=False)
-        comment.author = request.user
-        comment.post = post
-        comment.save()
+    post = get_object_or_404(Post, id=post_id)
+    form = CommentForm()
     comments = Comment.objects.prefetch_related('post').filter(post=post_id)
     return render(
         request,
@@ -75,7 +66,7 @@ def post_create(request):
 
 @login_required
 def post_edit(request, post_id):
-    post = get_object_or_404(Post, pk=int(post_id))
+    post = get_object_or_404(Post, pk=post_id)
     if post.author != request.user:
         return redirect('posts:post_detail', post.pk)
     form = PostForm(
@@ -95,7 +86,7 @@ def post_edit(request, post_id):
 
 @login_required
 def add_comment(request, post_id):
-    post = get_object_or_404(Post, pk=int(post_id))
+    post = get_object_or_404(Post, pk=post_id)
     form = CommentForm(request.POST or None)
     if form.is_valid():
         comment = form.save(commit=False)
@@ -120,7 +111,7 @@ def profile_follow(request, username):
     is_following = Follow.objects.filter(
         user=request.user,
         author=author
-    )
+    ).exists()
     if request.user != author and not is_following:
         Follow.objects.create(user=request.user,
                               author=author)
