@@ -1,7 +1,3 @@
-.this_author {
-    width: 50px;
-}
-
 h1 {
     text-align: center;
     font-size: 42px;
@@ -13,17 +9,17 @@ a {
     text-align: center;
     font-size: 12px;
     padding: 15px;
-    font-family: Comic Sans MS, Comic Sans, Arial, sans-serif;
 }
 
 p {
     text-align: center;
-    font-size: 24px;
+    font-size: 22px;
     padding: 15px;
-    font-family: Comic Sans MS, Comic Sans, Arial, sans-serif;
+    /* font-family: Comic Sans MS, Comic Sans, Arial, sans-serif; */
+    font-family: Arial, Helvetica, sans-serif;
     opacity: 0;
     transition: 1s;
-    animation: show_link 5s 1;
+    animation: show_link 2s 1;
     animation-fill-mode: forwards;
     animation-delay: 1s;
 }
@@ -37,11 +33,11 @@ p {
     opacity: 0;
     transition: 1s;
     /*Скорость перехода состояния элемента*/
-    animation: show_link 5s 1;
+    animation: show_link 2s 1;
     /* Указываем название анимации, её время и количество повторов*/
     animation-fill-mode: forwards;
     /* Чтобы элемент оставался в конечном состоянии анимации */
-    animation-delay: 2s;
+    animation-delay: 1s;
     /* Задержка перед началом */
 }
 
@@ -56,6 +52,47 @@ p {
     }
 }
 
-section p {
+section {
+    margin-bottom: 2em;
+}
+
+.this_author p,
+.certifacate_stepik p,
+.author_hobbies p,
+.tech p {
+    margin-top: 2em;
     text-align: left;
+    text-indent: 60px;
+    width: 100%;
+    height: auto;
+    /* box-shadow: 5px 5px black; */
+}
+
+.this_author img {
+    border: 4px solid;
+    animation: show_link 2s 1;
+}
+
+.this_author h3,
+.certifacate_stepik h3,
+.author_hobbies h3,
+.tech h3 {
+    text-align: center;
+    text-decoration: underline;
+    animation: show_link 2s 1;
+}
+
+.row {
+    background-color: rgb(246, 246, 248);
+    padding: 2em;
+    border-radius: 1em;
+    border-left: 2em solid lightskyblue;
+}
+
+.certifacate_stepik li>a {
+    font-size: 18px;
+}
+
+.author_hobbies li>a {
+    font-size: 18px;
 }

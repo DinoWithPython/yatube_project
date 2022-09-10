@@ -7,100 +7,125 @@
   <link rel="stylesheet" href="{% static 'css/style.css' %}" />
   <div class="container py-5">
     <h1>Подождите секунду...автор сейчас подойдет.</h1>
-    <p>
-      Перед Вами результат обучения на яндекс практикуме в течение нескольких месяцев и результаты самообучения.
-    </p>
-    <section class="this_author">
-      <div>
+    <p>Перед Вами результат обучения на яндекс практикуме в течение нескольких месяцев и результаты самообучения.</p>
+    <section class="this_author row">
+      <div class="col-sm-12 col-md-12 col-lg-8">
         <h3>История становления героя</h3>
-        <p>Примерно, а вернее точно он зарегистрировался на одном ресурсе по обучению 13.07.2020 и начал бесплатное изучение основ программирования на Python. Жажда знаний была неутолима, поэтому курсы осваивались одни за одним и в конечном счете он пришел к ним. Кто-то их боялся, кто-то не решался обращаться к ним, кто-то обращался уже не один раз. У них было много имен, но знали их как <b>Яндекс.Практикум</b></p>
+        <p>
+          Примерно, а вернее точно он зарегистрировался на одном ресурсе по обучению 13.07.2020 и начал бесплатное изучение основ программирования на Python. Жажда знаний была неутолима, поэтому курсы осваивались одни за одним и в конечном счете он пришел к ним. Кто-то их боялся, кто-то не решался обращаться к ним, кто-то обращался уже не один раз. У них было много имен, но знали их как <b>Яндекс.Практикум</b>
+        </p>
       </div>
-      <div>
-        <img src="{% static 'img/photo_author1.jpg' %}"
-             width="160"
-             height="160"
+      <div class="col-sm-12 col-md-12 col-lg-4">
+        <img src="{% static 'img/photo_author.jpg' %}"
+             width
+             100
+             height
+             auto
              alt="Фотка афтора">
       </div>
     </section>
-    <section class="certifacate_stepik">
-      <div>
-        <p>Курсы включали в себя основы Python, более продвинутые курсы по нему же, основы PHP, основы JavaScript, легкую ошибку молодости основы С++. Так же основы Linux, включая навыки работы с vim и написания bash-скриптов. Впрочем, не только этим силен автор, но и курс по автоматизированному тестированию с применением Selenium Web Driver оставил свои следы и нашел своё применение. Конечно же, что за программист без "защиты", поэтому и курс от яндекса по безопасности в интернете был добавлен в копилку.</p>
+    <section class="certifacate_stepik row">
+      <div class="col-sm-12 col-md-12 col-lg-8">
+        <h3>Компетенции</h3>
+        <p>
+          Курсы включали в себя основы Python, более продвинутые курсы по нему же, основы PHP, основы JavaScript, легкую ошибку молодости основы С++. Так же основы Linux, включая навыки работы с vim и написания bash-скриптов. Впрочем, не только этим силен автор, но и курс по автоматизированному тестированию с применением Selenium Web Driver оставил свои следы и нашел своё применение. Конечно же, что за программист без "защиты", поэтому и курс от яндекса по безопасности в интернете был добавлен в копилку.
+        </p>
       </div>
-      <div>
-        <a href="https://stepik.org/cert/944396"
-           target="_blank"
-           style="text-decoration: none;">Python: Основы и применение</a>
-        <a href="https://stepik.org/cert/1363313"
-           target="_blank"
-           style="text-decoration: none;">Python vs Selenium</a>
-        <a href="https://stepik.org/cert/1376984"
-           target="_blank"
-           style="text-decoration: none;">JavaScript для начинающих</a>
-        <a href="https://stepik.org/cert/1588348"
-           target="_blank"
-           style="text-decoration: none;">Python от новичка до профессионала(включая линтеры, async, threading)</a>
-        <a href="https://stepik.org/cert/972626"
-           target="_blank"
-           style="text-decoration: none;">Веб-разработка для начинающих HTML и CSS</a>
-        <a href="https://stepik.org/cert/1337936"
-           target="_blank"
-           style="text-decoration: none;">Введение в Linux</a>
-        <a href="https://stepik.org/cert/1459376"
-           target="_blank"
-           style="text-decoration: none;">Программирование на языке C++</a>
-        <a href="https://stepik.org/cert/785015"
-           target="_blank"
-           style="text-decoration: none;">Безопасность в интернете</a>
+      <div class="col-sm-12 col-md-12 col-lg-4">
+        <ul>
+          <li>
+            <a href="https://stepik.org/cert/944396"
+               target="_blank"
+               style="text-decoration: none;">Python: Основы и применение</a>
+          </li>
+          <li>
+            <a href="https://stepik.org/cert/1363313"
+               target="_blank"
+               style="text-decoration: none;">Python vs Selenium</a>
+          </li>
+          <li>
+            <a href="https://stepik.org/cert/1376984"
+               target="_blank"
+               style="text-decoration: none;">JavaScript для начинающих</a>
+          </li>
+          <li>
+            <a href="https://stepik.org/cert/1588348"
+               target="_blank"
+               style="text-decoration: none;">Python от новичка до профессионала(включая линтеры, async, threading)</a>
+          </li>
+          <li>
+            <a href="https://stepik.org/cert/972626"
+               target="_blank"
+               style="text-decoration: none;">Веб-разработка для начинающих HTML и CSS</a>
+          </li>
+          <li>
+            <a href="https://stepik.org/cert/1337936"
+               target="_blank"
+               style="text-decoration: none;">Введение в Linux</a>
+          </li>
+          <li>
+            <a href="https://stepik.org/cert/1459376"
+               target="_blank"
+               style="text-decoration: none;">Программирование на языке C++</a>
+          </li>
+          <li>
+            <a href="https://stepik.org/cert/785015"
+               target="_blank"
+               style="text-decoration: none;">Безопасность в интернете</a>
+          </li>
+        </ul>
       </div>
     </section>
-    <section class="author_hobbies">
-      <div>
-        <p>Раз речь идёт о герое, то нельзя не упомянуть его характеристики: женат, Рост - немного выше Сон Гоку, вес - около 13 среднестатистических беркутов, увлекается компьютерными играми(но не задрот...наверное). После получения навыка программирования уделяет больше временни именно прокачке этой характеристики. На выходных любит поездки с очаровашкой-женушкой в музеи, парки, кинотеатры и рестораны быстрого питания.</p>
+    <section class="author_hobbies row">
+      <div class="col-sm-12 col-md-12 col-lg-8">
+        <h3>Шалости автора</h3>
+        <p>
+          Раз речь идёт о герое, то нельзя не упомянуть его характеристики: женат, Рост - немного выше Сон Гоку, вес - около 13 среднестатистических беркутов, увлекается компьютерными играми(но не задрот...наверное). После получения навыка программирования уделяет больше временни именно прокачке этой характеристики. На выходных любит поездки с очаровашкой-женушкой в музеи, парки, кинотеатры и рестораны быстрого питания.
+        </p>
       </div>
-      <div>
-        <p>Любимы игры(ПК): серия Assassin's Creed, PC Building Simulator, Car Mechanic Simulator, Diablo III, World of Tanks. <br/>Фильмы в жанре ужасов, фантастики, триллеры.<br/>Многие аниме, в том числе китайские новинки.</p>
-      </div>
-    </section>
-    <ul class="aside-widget__info" style="list-style-type: none">
-      <li class="profile-stat_item profile-stat_item__social">
-        <a href="https://github.com/LunarBirdMYT"
-           class="profile-stat_item__social-link"
-           target="_blank"
-           style="text-decoration: none;"
-           rel="noopener noreferrer">
-          <img src="{% static 'img/github.svg' %}"
-               width="16"
-               height="16"
-               alt="LunarBirdMYT"/>
-          GitHub
-        </a>
-      </li>
-      <li class="profile-stat_item profile-stat_item__social">
-        <a href="https://gitflic.ru/user/lunarbirdmyt/projects"
-           class="profile-stat_item__social-link"
-           target="_blank"
-           style="text-decoration: none;"
-           rel="noopener noreferrer">
-          <img src="{% static 'img/gitflic.png' %}"
-               width="16"
-               height="16"
-               alt="https://gitflic.ru/user/lunarbirdmyt/projects"/>
-          GitFlic
-        </a>
-      </li>
-      <li class="profile-stat_item profile-stat_item__social">
-        <a href="https://vk.com/lunarbird"
-           class="profile-stat_item__social-link"
-           target="_blank"
-           style="text-decoration: none;"
-           rel="noopener noreferrer">
-          <img src="{% static 'img/vk.svg' %}"
-               width="16"
-               height="16"
-               alt="lunarbird"/>
-          Вконтакте
-        </a>
-      </li>
-    </ul>
+      <div class="col-sm-12 col-md-12 col-lg-4">
+        <ul class="aside-widget__info" style="list-style-type: none">
+          <li class="profile-stat_item profile-stat_item__social">
+            <a href="https://github.com/LunarBirdMYT"
+               class="profile-stat_item__social-link"
+               target="_blank"
+               style="text-decoration: none;"
+               rel="noopener noreferrer">
+              <img src="{% static 'img/github.svg' %}"
+                   width="32"
+                   height="32"
+                   alt="LunarBirdMYT"/>
+              GitHub
+            </a>
+          </li>
+          <li class="profile-stat_item profile-stat_item__social">
+            <a href="https://gitflic.ru/user/lunarbirdmyt/projects"
+               class="profile-stat_item__social-link"
+               target="_blank"
+               style="text-decoration: none;"
+               rel="noopener noreferrer">
+              <img src="{% static 'img/gitflic.png' %}"
+                   width="32"
+                   height="32"
+                   alt="https://gitflic.ru/user/lunarbirdmyt/projects"/>
+              GitFlic
+            </a>
+          </li>
+          <li class="profile-stat_item profile-stat_item__social">
+            <a href="https://vk.com/lunarbird"
+               class="profile-stat_item__social-link"
+               target="_blank"
+               style="text-decoration: none;"
+               rel="noopener noreferrer">
+              <img src="{% static 'img/vk.svg' %}"
+                   width="32"
+                   height="32"
+                   alt="lunarbird"/>
+              Вконтакте
+            </a>
+          </li>
+        </ul>
+      </section>
+    </div>
   </div>
 {% endblock content %}
