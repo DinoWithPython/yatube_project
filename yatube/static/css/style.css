@@ -5,12 +5,6 @@ h1 {
     font-family: Comic Sans MS, Comic Sans, Arial, sans-serif;
 }
 
-a {
-    text-align: center;
-    font-size: 12px;
-    padding: 15px;
-}
-
 p {
     text-align: center;
     font-size: 22px;
@@ -95,4 +89,38 @@ section {
 
 .author_hobbies li>a {
     font-size: 18px;
+}
+
+.author_hobbies div:nth-child(2)>ul {
+    margin-top: 21%;
+    margin-left: 30%;
+}
+
+.author_hobbies div:nth-child(2)>ul>li {
+    padding-top: 2em;
+}
+
+.certifacate_stepik div:nth-child(2)>ul {
+    margin-top: 12%;
+}
+
+@media screen and (max-width:992px) {
+    .author_hobbies div:nth-child(2)>ul {
+        margin-top: 0;
+        margin-left: 0;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .certifacate_stepik div:nth-child(2)>ul {
+        margin-top: 0%;
+    }
+
+    .this_author img {
+        margin-left: 22%;
+    }
+
+    .author_hobbies div:nth-child(2)>ul>li {
+        padding-top: 0;
+    }
 }
