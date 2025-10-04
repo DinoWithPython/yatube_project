@@ -47,3 +47,8 @@ python manage.py migrate
 ```
 python manage.py runserver
 ```
+
+### Создание суперпользователя
+```
+python manage.py createsuperuser
+```
